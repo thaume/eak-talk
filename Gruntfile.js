@@ -104,6 +104,14 @@ module.exports = function(grunt) {
 			theme: {
 				files: [ 'css/theme/source/*.scss', 'css/theme/template/*.scss' ],
 				tasks: 'themes'
+			},
+			html: {
+				files: [ 'index.html' ],
+
+				options: {
+	        debounceDelay: 200,
+	        livereload: true
+	      }
 			}
 		}
 

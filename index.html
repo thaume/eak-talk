@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>reveal.js - The HTML Presentation Framework</title>
+		<title>ES6 modules and EmberJS - A taste of the future</title>
 
 		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
 		<meta name="author" content="Hakim El Hattab">
@@ -43,78 +43,113 @@
 			<!-- Any section element inside of this container is displayed as a slide -->
 			<div class="slides">
 				<section>
-					<h1>Reveal.js</h1>
-					<h3>HTML Presentations Made Easy</h3>
+					<h1>ES6 modules and EmberJS</h1>
+					<h3>A taste of the future</h3>
 					<p>
-						<small>Created by <a href="http://hakim.se">Hakim El Hattab</a> / <a href="http://twitter.com/hakimel">@hakimel</a></small>
+						<small>By <a href="http://thau.me">Tom Coquereau</a> / <a href="http://twitter.com/thaume">@thaume</a></small>
 					</p>
-				</section>
-
-				<section>
-					<h2>Heads Up</h2>
-					<p>
-						reveal.js is a framework for easily creating beautiful presentations using HTML. You'll need a browser with
-						support for CSS 3D transforms to see it in its full glory.
-					</p>
-
-					<aside class="notes">
-						Oh hey, these are some notes. They'll be hidden in your presentation, but you can see them if you open the speaker notes window (hit 's' on your keyboard).
-					</aside>
 				</section>
 
 				<!-- Example of nested vertical slides -->
 				<section>
 					<section>
-						<h2>Vertical Slides</h2>
+						<h2>Ember and modules</h2>
+						<ul>
+							<li>No module system</li>
+							<li>Everything is stuffed in a global App</li>
+						</ul>
+					</section>
+					<section>
+						<h2>AngularJS modules</h2>
+						<pre><code data-trim contenteditable>
+angular.module('xmpl.directive', []);
+
+angular.module('xmpl.filter', []);
+
+angular.module('xmpl', ['xmpl.service', 'xmpl.directive', 'xmpl.filter']).
+  run(function(greeter, user) {
+    greeter.localize({
+      salutation: 'Bonjour'
+    });
+    user.load('World');
+  });
+					</code></pre>
+					</section>
+					<section>
+						<h2>Backbone Marionette modules</h2>
+						<pre><code data-trim contenteditable>
+MyApp = new Marionette.Application();
+
+MyApp.module("MyModule", function(MyModule, MyApp, Backbone, Marionette, $, _){
+
+  // do stuff here ...
+
+});
+						</code></pre>
+					</section>
+					<section>
+						<h2>AMD modules</h2>
+						<pre><code data-trim contenteditable>
+define([
+  "jQuery",
+  "React"
+], function(jQuery, React){
+
+  // do stuff here ...
+
+});
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h2>AMD modules ?</h2>
+					<p>
+						Tom Dale: <a href="http://tomdale.net/2012/01/amd-is-not-the-answer/">AMD is not the answer</a>
+					</p>
+					<p>
+						Ember is not going to implement AMD modules
+					</p>
+				</section>
+
+				<section>
+					<section>
+						<h2>November 2013 TC39 meeting : ES6 modules spec done</h2>
 						<p>
-							Slides can be nested inside of other slides,
-							try pressing <a href="#" class="navigate-down">down</a>.
+							Ember is definitely moving toward ES6 modules support
 						</p>
-						<a href="#" class="image navigate-down">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Down arrow">
-						</a>
 					</section>
 					<section>
-						<h2>Basement Level 1</h2>
-						<p>Press down or up to navigate.</p>
+						<h2>Ember core</h2>
+						<p>
+							Being modularized : <a href="https://github.com/emberjs/ember.js/tree/master/packages_es6">Github repo</a>
+						</p>
 					</section>
 					<section>
-						<h2>Basement Level 2</h2>
-						<p>Cornify</p>
-						<a class="test" href="http://cornify.com">
-							<img width="280" height="326" src="https://s3.amazonaws.com/hakim-static/reveal-js/cornify.gif" alt="Unicorn">
-						</a>
+						<h2>ES6 transpiler</h2>
+						<p>
+							<ul>
+								<li>ES6 modules are not supported in any browser yet</li>
+								<li>Transpile into AMD, CommonJS or global (modules can work both in NodeJS and in the browser)</li>
+								<li><a href="https://github.com/square/es6-module-transpiler">Github repo</a></li>
+							</ul>
+						</p>
 					</section>
 					<section>
-						<h2>Basement Level 3</h2>
-						<p>That's it, time to go back up.</p>
-						<a href="#/2" class="image">
-							<img width="178" height="238" src="https://s3.amazonaws.com/hakim-static/reveal-js/arrow.png" alt="Up arrow" style="-webkit-transform: rotate(180deg);">
-						</a>
+						<h2>Ember App Kit</h2>
+						<ul>
+							<li>Strong structure to start en Ember application</li>
+							<li>Custom resolver</li>
+							<li>Based on ES6 modules</li>
+							<li><a href="https://github.com/stefanpenner/ember-app-kit">Github repo</a></li>
+						</ul>
 					</section>
 				</section>
 
 				<section>
-					<h2>Slides</h2>
+					<h2>Ember App Kit</h2>
 					<p>
-						Not a coder? No problem. There's a fully-featured visual editor for authoring these, try it out at <a href="http://slid.es" target="_blank">http://slid.es</a>.
-					</p>
-				</section>
 
-				<section>
-					<h2>Point of View</h2>
-					<p>
-						Press <strong>ESC</strong> to enter the slide overview.
-					</p>
-					<p>
-						Hold down alt and click on any element to zoom in on it using <a href="http://lab.hakim.se/zoom-js">zoom.js</a>. Alt + click anywhere to zoom back out.
-					</p>
-				</section>
-
-				<section>
-					<h2>Works in Mobile Safari</h2>
-					<p>
-						Try it out! You can swipe through the slides and pinch your way to the overview.
 					</p>
 				</section>
 
