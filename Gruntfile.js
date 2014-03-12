@@ -109,9 +109,9 @@ module.exports = function(grunt) {
 				files: [ 'index.html' ],
 
 				options: {
-	        debounceDelay: 200,
-	        livereload: true
-	      }
+					debounceDelay: 200,
+					livereload: true
+				}
 			}
 		}
 

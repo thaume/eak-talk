@@ -54,19 +54,17 @@
 				<section>
 					<section>
 						<h2>Ember and modules</h2>
-						<ul>
-							<li>No module system</li>
-							<li>Everything is stuffed in a global App</li>
-						</ul>
+						<p>No module system</p>
+						<p>Everything is stuffed in a global App</p>
 					</section>
 					<section>
 						<h2>AngularJS modules</h2>
 						<pre><code data-trim contenteditable>
-angular.module('xmpl.directive', []);
+angular.module('myModule.service', []);
+angular.module('myModule.directive', []);
+angular.module('myModule.filter', []);
 
-angular.module('xmpl.filter', []);
-
-angular.module('xmpl', ['xmpl.service', 'xmpl.directive', 'xmpl.filter']).
+angular.module('myModule', ['myModule.service', 'myModule.directive', 'myModule.filter']).
   run(function(greeter, user) {
     greeter.localize({
       salutation: 'Bonjour'
@@ -127,40 +125,112 @@ define([
 					</section>
 					<section>
 						<h2>ES6 transpiler</h2>
-						<p>
-							<ul>
-								<li>ES6 modules are not supported in any browser yet</li>
-								<li>Transpile into AMD, CommonJS or global (modules can work both in NodeJS and in the browser)</li>
-								<li><a href="https://github.com/square/es6-module-transpiler">Github repo</a></li>
-							</ul>
+						<p>ES6 modules are not supported in any browser yet</p>
+            <p>Transpile into AMD, CommonJS or global (modules can work both in NodeJS and in the browser)</p>
+            <p><a href="https://github.com/square/es6-module-transpiler">Github repo</a></p>
 						</p>
 					</section>
 					<section>
 						<h2>Ember App Kit</h2>
-						<ul>
-							<li>Strong structure to start en Ember application</li>
-							<li>Custom resolver</li>
-							<li>Based on ES6 modules</li>
-							<li><a href="https://github.com/stefanpenner/ember-app-kit">Github repo</a></li>
-						</ul>
+						<p>Strong structure to start en Ember application</p>
+						<p>Custom resolver</p>
+						<p>Based on ES6 modules</p>
+						<p><a href="https://github.com/stefanpenner/ember-app-kit">Github repo</a></p>
 					</section>
 				</section>
 
 				<section>
 					<h2>Ember App Kit</h2>
-					<p>
-
-					</p>
 				</section>
 
 				<section>
-					<h2>Marvelous Unordered List</h2>
-					<ul>
-						<li>No order here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-						<li>Or here</li>
-					</ul>
+          <section>
+  					<h2>Project structure</h2>
+  					<pre><code data-trim contenteditable style="max-height: 600px;">
+#-- app
+  #-- adapters
+    application.js
+  #-- components
+    pretty-color.js
+  #-- controllers
+    mail.js
+  #-- helpers
+    reverse-word.js
+  #-- models
+    mailbox.js
+    message.js
+  #-- routes
+    mail.js
+  #-- templates
+    #-- mailbox
+      index.hbs
+    application.hbs
+    index.hbs
+    mail.hbs
+    mailbox.hbs
+  #-- views
+    mail.js
+  app.js
+  index.html
+  router.js
+      			</code></pre>
+          </section>
+
+          <section>
+            <h2>Naming conventions</h2>
+            <p>Only the file's name matters</p>
+            <p>EAK and ES6 modules will resolve dependencies based on files paths<br>(that's what NodeJS does too)</p>
+            <p><code style="color:#CC9393;">App.MailRoute</code> would have know to render <code style="color:#CC9393;">App.MailView</code>, EAK has the same abilities with modules</p>
+            <pre><code data-trim contenteditable style="max-height: 600px;">
+#-- app
+  #-- controllers
+    mail.js
+  #-- models
+    mailbox.js
+    message.js
+  #-- routes
+    mail.js // will know it has to use views/mail and controllers/mail
+  #-- templates
+    #-- mailbox
+      index.hbs
+    application.hbs
+    index.hbs
+    mail.hbs
+    mailbox.hbs
+  #-- views
+    mail.js
+            </code></pre>
+          </section>
+
+          <section>
+            <h2>Resolver</h2>
+            <pre><code data-trim style="max-height: 600px;">
+// Old way, stuffing everything in a global
+// ----------
+App.MailRoute = Ember.route.extend({
+  model: function(params) {
+    return this.store.find('mailbox', params.id);
+  }
+});
+
+// New way, export an ES6 module from routes/mail.js
+// ----------
+export default Ember.route.extend({
+  model: function(params) {
+    return this.store.find('mailbox', params.id);
+  }
+});
+
+// can also be written
+var MailRoute = Ember.route.extend({
+  model: function(params) {
+    return this.store.find('mailbox', params.id);
+  }
+});
+export default MailRoute;
+            </code></pre>
+          </section>
+
 				</section>
 
 				<section>
@@ -410,7 +480,7 @@ function linkify( selector ) {
 
 				// Parallax scrolling
 				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
-				// parallaxBackgroundSize: '2100px 900px',
+				// parallaxBackgroundSize: '1200px 800px',
 
 				// Optional libraries used to extend on reveal.js
 				dependencies: [
